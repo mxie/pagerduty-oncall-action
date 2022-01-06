@@ -18,6 +18,7 @@ jobs:
       uses: mxie/pagerduty-oncall-action@main    # replace `main` with release tag
       with:
         token: ${{ secrets.PAGERDUTY_TOKEN }}
+        schedule-id: ABCDEFG
     - run: echo ${{ steps.pagerduty.outputs.person }} is on call
 
 ```
