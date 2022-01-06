@@ -7,7 +7,7 @@ async function run() {
   const pdClient = pd.api({ token: pdToken });
 
   pdClient.get('/oncalls', { params: { "schedule_ids[]": scheduleId, "limit": 1 } })
-  .then({ data, resource, next } => {
+  .then(({resource}) => {
     if (resource.length > 0) {
       person = resource[0]["user"]["summary"]
       core.info(`🎉 On-call person found: ${person}`);
@@ -16,8 +16,8 @@ async function run() {
       core.setFailed("❓ No one is on the schedule");
     }
   })
-  .catch({
-    core.setFailed("❌ Unable to fetch on-call data");
+  .catch((error) => {
+    core.setFailed(`❌ Unable to fetch on-call data: ${error}`);
   });
 }
 
