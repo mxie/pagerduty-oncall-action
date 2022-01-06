@@ -1,0 +1,27 @@
+{
+  "name": "pagerduty-oncall-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mxie/pagerduty-oncall-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mxie/pagerduty-oncall-action/issues"
+  },
+  "homepage": "https://github.com/mxie/pagerduty-oncall-action#readme",
+  "description": "",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@pagerduty/pdjs": "^2.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.6.0"
+  }
+}

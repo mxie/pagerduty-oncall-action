@@ -1,0 +1,15 @@
+name: "PagerDuty On-call Next"
+description: "Find out who's on call next for a given schedule"
+inputs:
+  token:
+    description: "PagerDuty API token"
+    required: true
+  schedule-id:
+    description: "ID of on-call schedule to look up"
+    required: true
+outputs:
+  person:
+    description: "The person who's on call"
+runs:
+  using: "node16"
+  main: "index.js"
