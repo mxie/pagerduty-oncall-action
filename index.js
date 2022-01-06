@@ -1,12 +1,12 @@
-import { api } from '@pagerduty/pdjs';
-import * as core from "@actions/core";
+const pd = require("@pagerduty/pdjs");
+const core = require("@actions/core");
 
 async function run() {
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
-  const pd = api({ token: pdToken });
+  const pdClient = pd.api({ token: pdToken });
 
-  pd.get('/oncalls', { params: { "schedule_ids[]": scheduleId, "limit": 1 } })
+  pdClient.get('/oncalls', { params: { "schedule_ids[]": scheduleId, "limit": 1 } })
   .then({ data, resource, next } => {
     if (resource.length > 0) {
       person = resource[0]["user"]["summary"]
