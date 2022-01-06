@@ -1,4 +1,4 @@
-name: "PagerDuty On-call Next"
+name: "PagerDuty On-call"
 description: "Find out who's on call next for a given schedule"
 inputs:
   token:
@@ -13,3 +13,6 @@ outputs:
 runs:
   using: "node16"
   main: "index.js"
+branding:
+  icon: "bell"
+  color: "purple"
