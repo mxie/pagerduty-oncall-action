@@ -5,7 +5,7 @@ A GitHub Action to find the next person on call through PagerDuty.
 ## Usage
 
 ```yml
-name: Find next on call
+name: Find next person on call
 on:
   schedule:
     - cron: 0 8 * * 1
@@ -20,5 +20,4 @@ jobs:
         token: ${{ secrets.PAGERDUTY_TOKEN }}
         schedule-id: ABCDEFG
     - run: echo ${{ steps.pagerduty.outputs.person }} is on call
-
 ```
