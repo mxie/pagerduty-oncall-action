@@ -13,7 +13,7 @@ async function run() {
     .then(({ resource }) => {
       if (resource.length > 0) {
         // `resource` should be a list of users
-        const person = resource[0]["summary"];
+        const person = resource[0]["user"]["summary"];
         core.info(`🎉 On-call person found: ${person}`);
         core.setOutput("person", person);
       } else {
