@@ -12,12 +12,16 @@ async function run() {
     .then(({ resource }) => {
       // `resource` should be a list of oncall entries
       if (resource.length > 0) {
-        core.debug(`Oncalls found: ${resource}`);
+        core.debug(`Oncalls found: ${JSON.stringify(resource)}`);
 
         const person = resource[0]["user"]["summary"];
 
-        core.info(`🎉 On-call person found: ${person}`);
-        core.setOutput("person", person);
+        if (typeof person !== "undefined") {
+          core.info(`🎉 On-call person found: ${person}`);
+          core.setOutput("person", person);
+        } else {
+          core.setFailed("❓ Could not parse on-call entry");
+        }
       } else {
         core.setFailed("❓ No one is on the schedule");
       }
