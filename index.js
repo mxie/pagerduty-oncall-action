@@ -5,12 +5,14 @@ async function run() {
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
   const pdClient = pd.api({ token: pdToken });
+  const today = new Date();
 
   pdClient
-    .get("/oncalls", { params: { "schedule_ids[]": [scheduleId], limit: 1 } })
+    .get(`/schedules/${scheduleId}/users`, { params: { since: today } })
     .then(({ resource }) => {
       if (resource.length > 0) {
-        person = resource[0]["user"]["summary"];
+        // `resource` should be a list of users
+        const person = resource[0]["summary"];
         core.info(`🎉 On-call person found: ${person}`);
         core.setOutput("person", person);
       } else {
