@@ -3794,10 +3794,11 @@ async function run() {
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
   const pdClient = pd.api({ token: pdToken });
-  const today = new Date();
+  const today = new Date().toISOString().split("T")[0];
+  const params = `schedule_ids[]=${scheduleId}&since=${today}`;
 
   pdClient
-    .get(`/schedules/${scheduleId}/users`, { params: { since: today } })
+    .get(`/oncalls?${params}`)
     .then(({ resource }) => {
       if (resource.length > 0) {
         // `resource` should be a list of users
