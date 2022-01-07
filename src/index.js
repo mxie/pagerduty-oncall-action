@@ -5,14 +5,13 @@ async function run() {
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
   const pdClient = pd.api({ token: pdToken });
-  const today = new Date().toISOString().split("T")[0];
-  const params = `schedule_ids[]=${scheduleId}&since=${today}`;
+  const params = `schedule_ids[]=${scheduleId}&earliest=true`;
 
   pdClient
     .get(`/oncalls?${params}`)
     .then(({ resource }) => {
       if (resource.length > 0) {
-        // `resource` should be a list of users
+        // `resource` should be a list of oncall entries
         const person = resource[0]["user"]["summary"];
         core.info(`🎉 On-call person found: ${person}`);
         core.setOutput("person", person);
