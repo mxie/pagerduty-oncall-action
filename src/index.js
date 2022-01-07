@@ -5,7 +5,7 @@ async function run() {
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
   const pdClient = pd.api({ token: pdToken });
-  const params = `schedule_ids[]=${scheduleId}&earliest=true`;
+  const params = `schedule_ids[]=${scheduleId}&earliest=true&limit=1`;
 
   pdClient
     .get(`/oncalls?${params}`)
