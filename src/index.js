@@ -10,9 +10,12 @@ async function run() {
   pdClient
     .get(`/oncalls?${params}`)
     .then(({ resource }) => {
+      // `resource` should be a list of oncall entries
       if (resource.length > 0) {
-        // `resource` should be a list of oncall entries
+        core.debug(`Oncalls found: ${resource}`);
+
         const person = resource[0]["user"]["summary"];
+
         core.info(`🎉 On-call person found: ${person}`);
         core.setOutput("person", person);
       } else {
