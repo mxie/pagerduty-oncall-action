@@ -7,6 +7,9 @@ inputs:
   schedule-id:
     description: "ID of on-call schedule to look up"
     required: true
+  start-date:
+    description: "Start date of on-call to query in ISO8601"
+    required: false
 outputs:
   person:
     description: "The person who's on call"

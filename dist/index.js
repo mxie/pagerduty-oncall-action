@@ -3791,13 +3791,24 @@ const pd = __nccwpck_require__(505);
 const core = __nccwpck_require__(618);
 
 async function run() {
+  // parse action inputs
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
+  const startDate = core.getInput("start-date");
+
+  // set up API client
   const pdClient = pd.api({ token: pdToken });
-  const params = `schedule_ids[]=${scheduleId}&earliest=true&limit=1`;
+  const params = {
+    "schedule_ids[]": scheduleId,
+    since: startDate,
+    limit: 1,
+  };
+  const queryParams = Object.entries(params)
+    .map(([k, v]) => `${k}=${v}`)
+    .join("&");
 
   pdClient
-    .get(`/oncalls?${params}`)
+    .get(`/oncalls?${queryParams}`)
     .then(({ resource }) => {
       // `resource` should be a list of oncall entries
       if (resource.length > 0) {
