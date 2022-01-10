@@ -21,3 +21,5 @@ jobs:
         schedule-id: ABCDEFG
     - run: echo ${{ steps.pagerduty.outputs.person }} is on call
 ```
+
+See [action.yml](./action.yml) for accepted inputs.

@@ -8,7 +8,10 @@ inputs:
     description: "ID of on-call schedule to look up"
     required: true
   start-date:
-    description: "Start date of on-call to query in ISO8601"
+    description: "Start date of on-call to query (in ISO8601)"
+    required: false
+  end-date:
+    description: "End date of on-call to query (in ISO8601)"
     required: false
 outputs:
   person:

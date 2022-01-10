@@ -6,12 +6,18 @@ async function run() {
   const pdToken = core.getInput("token");
   const scheduleId = core.getInput("schedule-id");
   const startDate = core.getInput("start-date");
+  const endDate = core.getInput("end-date");
+
+  if (startDate && !endDate) {
+    core.setFailed("An end date is required when a start date is passed in");
+  }
 
   // set up API client
   const pdClient = pd.api({ token: pdToken });
   const params = {
     "schedule_ids[]": scheduleId,
     since: startDate,
+    until: endDate,
     limit: 1,
   };
   const queryParams = Object.entries(params)
